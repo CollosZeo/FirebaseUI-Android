@@ -20,10 +20,11 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.StyleRes;
 
+import com.firebase.ui.auth.AuthUI.IdpConfig;
 import com.firebase.ui.auth.AuthUI;
-import com.firebase.ui.auth.provider.IDPProviderParcel;
 import com.firebase.ui.auth.util.Preconditions;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -36,7 +37,7 @@ public class FlowParameters implements Parcelable {
     public final String appName;
 
     @NonNull
-    public final List<IDPProviderParcel> providerInfo;
+    public final List<IdpConfig> providerInfo;
 
     @StyleRes
     public final int themeId;
@@ -54,7 +55,7 @@ public class FlowParameters implements Parcelable {
 
     public FlowParameters(
             @NonNull String appName,
-            @NonNull List<IDPProviderParcel> providerInfo,
+            @NonNull List<IdpConfig> providerInfo,
             @StyleRes int themeId,
             @DrawableRes int logoId,
             @Nullable String termsOfServiceUrl,
@@ -89,17 +90,25 @@ public class FlowParameters implements Parcelable {
         @Override
         public FlowParameters createFromParcel(Parcel in) {
             String appName = in.readString();
-            List<IDPProviderParcel> providerInfo =
-                    in.createTypedArrayList(IDPProviderParcel.CREATOR);
+            List<IdpConfig> providerInfo = in.createTypedArrayList(IdpConfig.CREATOR);
             int themeId = in.readInt();
             int logoId = in.readInt();
             String termsOfServiceUrl = in.readString();
             int smartLockEnabledInt = in.readInt();
             boolean smartLockEnabled = (smartLockEnabledInt != 0);
             int authMethodPickerType = in.readInt();
-
+            List<String> additionalFacebookPermissions = new ArrayList<>();
+            in.readStringList(additionalFacebookPermissions);
+            List<String> additionalGooglePermissions = new ArrayList<>();
+            in.readStringList(additionalGooglePermissions);
             return new FlowParameters(
-                    appName, providerInfo, themeId, logoId, termsOfServiceUrl, smartLockEnabled, authMethodPickerType);
+                    appName,
+                    providerInfo,
+                    themeId,
+                    logoId,
+                    termsOfServiceUrl,
+                    smartLockEnabled,
+                    authMethodPickerType);
         }
 
         @Override

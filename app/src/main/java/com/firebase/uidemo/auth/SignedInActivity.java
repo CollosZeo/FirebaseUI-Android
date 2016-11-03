@@ -31,6 +31,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.firebase.ui.auth.AuthUI;
+import com.firebase.ui.auth.IdpResponse;
 import com.firebase.uidemo.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -47,6 +48,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class SignedInActivity extends AppCompatActivity {
+    private static final String EXTRA_IDP_RESPONSE = "extra_idp_response";
 
     @BindView(android.R.id.content)
     View mRootView;
@@ -77,6 +79,7 @@ public class SignedInActivity extends AppCompatActivity {
         setContentView(R.layout.signed_in_layout);
         ButterKnife.bind(this);
         populateProfile();
+        populateIdpToken();
     }
 
     @OnClick(R.id.sign_out)
@@ -114,9 +117,8 @@ public class SignedInActivity extends AppCompatActivity {
     }
 
     private void deleteAccount() {
-        FirebaseAuth.getInstance()
-                .getCurrentUser()
-                .delete()
+        AuthUI.getInstance()
+                .delete(this)
                 .addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
@@ -174,15 +176,34 @@ public class SignedInActivity extends AppCompatActivity {
         mEnabledProviders.setText(providerList);
     }
 
+    private void populateIdpToken() {
+        IdpResponse idpResponse = getIntent().getParcelableExtra(EXTRA_IDP_RESPONSE);
+        if (idpResponse != null) {
+            String token = idpResponse.getIdpToken();
+            String secret = idpResponse.getIdpSecret();
+            if (token == null) {
+                findViewById(R.id.idp_token_layout).setVisibility(View.GONE);
+            } else {
+                ((TextView) findViewById(R.id.idp_token)).setText(token);
+            }
+            if (secret == null) {
+                findViewById(R.id.idp_secret_layout).setVisibility(View.GONE);
+            } else {
+                ((TextView) findViewById(R.id.idp_secret)).setText(secret);
+            }
+        }
+    }
+
     @MainThread
     private void showSnackbar(@StringRes int errorMessageRes) {
         Snackbar.make(mRootView, errorMessageRes, Snackbar.LENGTH_LONG)
                 .show();
     }
 
-    public static Intent createIntent(Context context) {
+    public static Intent createIntent(Context context, IdpResponse idpResponse) {
         Intent in = new Intent();
         in.setClass(context, SignedInActivity.class);
+        in.putExtra(EXTRA_IDP_RESPONSE, idpResponse);
         return in;
     }
 }
