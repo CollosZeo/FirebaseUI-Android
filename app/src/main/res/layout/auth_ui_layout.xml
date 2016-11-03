@@ -12,8 +12,8 @@
         android:layout_marginLeft="24dp"
         android:layout_marginRight="24dp"
         android:layout_marginTop="16dp"
-        android:paddingBottom="32dp"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:paddingBottom="32dp">
 
         <TextView
             style="@style/Base.TextAppearance.AppCompat.Headline"
@@ -37,6 +37,34 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
+            android:text="@string/use_type_header" />
+
+        <RadioGroup
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <RadioButton
+                android:id="@+id/auth_activity"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="true"
+                android:text="@string/auth_activity" />
+
+            <RadioButton
+                android:id="@+id/auth_dialog"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/auth_dialog" />
+
+        </RadioGroup>
+
+
+        <TextView
+            style="@style/Base.TextAppearance.AppCompat.Subhead"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
             android:text="@string/use_theme_header" />
 
         <RadioGroup
@@ -48,13 +76,13 @@
                 android:id="@+id/default_theme"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:checked="true"
                 android:text="@string/default_theme" />
 
             <RadioButton
                 android:id="@+id/purple_theme"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:checked="true"
                 android:text="@string/purple_theme" />
 
             <RadioButton
@@ -89,6 +117,7 @@
             android:id="@+id/google_provider"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:checked="true"
             android:text="@string/google_label" />
 
         <TextView
@@ -135,7 +164,6 @@
                 android:id="@+id/firebase_logo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:checked="true"
                 android:text="@string/firebase_logo_label" />
 
             <RadioButton
@@ -148,6 +176,7 @@
                 android:id="@+id/no_logo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:checked="true"
                 android:text="@string/no_logo_label" />
         </RadioGroup>
 

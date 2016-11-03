@@ -47,7 +47,8 @@
         <activity
             android:name=".ui.idp.AuthMethodPickerActivity"
             android:label="@string/default_toolbar_title"
-            android:theme="@style/FirebaseUI" />
+            android:screenOrientation="portrait"
+            android:theme="@style/FirebaseUI.Translucent.NoActionBar" />
         <activity
             android:name="com.firebase.ui.auth.ui.idp.IDPSignInContainerActivity"
             android:label="@string/default_toolbar_title"

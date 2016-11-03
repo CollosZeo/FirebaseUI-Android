@@ -51,6 +51,12 @@ public class AuthUiActivity extends AppCompatActivity {
 
     private static final int RC_SIGN_IN = 100;
 
+    @BindView(R.id.auth_activity)
+    RadioButton mAuthActivity;
+
+    @BindView(R.id.auth_dialog)
+    RadioButton mAuthDialog;
+
     @BindView(R.id.default_theme)
     RadioButton mUseDefaultTheme;
 
@@ -132,6 +138,7 @@ public class AuthUiActivity extends AppCompatActivity {
                         .setProviders(getSelectedProviders())
                         .setTosUrl(getSelectedTosUrl())
                         .setIsSmartLockEnabled(mEnableSmartLock.isChecked())
+                        .setAuthMethodPickerType(getAuthType())
                         .build(),
                 RC_SIGN_IN);
     }
@@ -167,7 +174,7 @@ public class AuthUiActivity extends AppCompatActivity {
     @StyleRes
     private int getSelectedTheme() {
         if (mUseDefaultTheme.isChecked()) {
-            return AuthUI.getDefaultTheme();
+            return mAuthActivity.isChecked() ? AuthUI.getDefaultTheme() : R.style.FirebaseUI_Translucent_NoActionBar;
         }
 
         if (mUsePurpleTheme.isChecked()) {
@@ -237,5 +244,13 @@ public class AuthUiActivity extends AppCompatActivity {
         Intent in = new Intent();
         in.setClass(context, AuthUiActivity.class);
         return in;
+    }
+
+    @AuthUI.AuthPickerType
+    public int getAuthType() {
+        if (mAuthActivity.isChecked()) {
+            return AuthUI.AUTH_TYPE_ACTIVITY;
+        }
+        return AuthUI.AUTH_TYPE_DIALOG;
     }
 }

@@ -14,4 +14,6 @@
     <color name="buttonTextColor">#FFFFFF</color>
     <color name="inputLabelColor">#757575</color>
     <color name="shadowColor">#eeeeee</color>
+    <color name="auth_picker_dialog_background">#c0000000</color>
+    <color name="auth_picker_dialog">#e8e8e8</color>
 </resources>

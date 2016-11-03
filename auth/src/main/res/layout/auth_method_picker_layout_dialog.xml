@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/auth_picker_dialog_background"
+    android:orientation="vertical"
+    tools:context=".ui.idp.AuthMethodPickerActivity">
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        style="?attr/alertDialogStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:background="@color/auth_picker_dialog"
+        android:gravity="center|bottom"
+        android:minWidth="@dimen/auth_picker_dialog_width"
+        android:orientation="vertical"
+        android:translationZ="3dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1.0"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/logo"
+                style="@style/FirebaseUI.AuthMethodPicker.Logo" />
+
+            <TextView
+                android:id="@+id/title"
+                style="@style/FirebaseUI.Text.Heading"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="@dimen/auth_picker_dialog_horizontal_margin"
+                android:text="@string/auth_picker_title_one_tap_login"
+                android:textStyle="normal"
+                android:typeface="sans"
+                tools:visibility="visible" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/btn_holder"
+            style="@style/FirebaseUI.AuthMethodPicker.ButtonHolder"
+            android:layout_weight="0"
+            android:paddingBottom="12dp">
+
+            <Button
+                android:id="@+id/email_provider"
+                style="@style/FirebaseUI.Button.AccountChooser.EmailButton"
+                android:text="@string/sign_in_with_email" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/smart_lock_holder"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="0"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:visibility="gone"
+            tools:visibility="visible">
+
+            <CheckBox
+                android:id="@+id/use_smart_lock"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/auth_picker_dialog_horizontal_margin"
+                android:checked="true"
+                android:text="@string/use_smart_lock"
+                android:textSize="13sp" />
+        </LinearLayout>
+
+    </LinearLayout>
+</FrameLayout>

@@ -48,4 +48,7 @@
 
     <string name="anonymous_auth_failed_toast">Authentication failed, uploads and downloads will not work.</string>
     <string name="anonymous_auth_failed_msg">Anonymous authentication failed. Make sure your device is online and that Anonymous Auth is configured in your Firebase project(https://console.firebase.google.com/project/_/authentication/providers)</string>
+    <string name="use_type_header">Auth picker:</string>
+    <string name="auth_activity">Activity</string>
+    <string name="auth_dialog">Dialog</string>
 </resources>

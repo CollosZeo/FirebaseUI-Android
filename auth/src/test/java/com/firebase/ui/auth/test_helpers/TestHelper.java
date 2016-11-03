@@ -18,6 +18,7 @@ import android.content.Context;
 
 import com.firebase.ui.auth.AuthUI;
 import com.firebase.ui.auth.ui.FlowParameters;
+import com.firebase.ui.auth.ui.idp.AuthMethodPickerActivity;
 import com.firebase.ui.auth.util.ProviderHelper;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
@@ -41,9 +42,9 @@ public class TestHelper {
             return FirebaseApp.initializeApp(
                     context,
                     new FirebaseOptions.Builder()
-                        .setApiKey(API_KEY)
-                        .setApplicationId(APPLICATION_ID)
-                        .build(),
+                            .setApiKey(API_KEY)
+                            .setApplicationId(APPLICATION_ID)
+                            .build(),
                     FIREBASE_APP_NAME);
         } catch (IllegalStateException e) {
             return FirebaseApp.getInstance(FIREBASE_APP_NAME);
@@ -57,7 +58,7 @@ public class TestHelper {
                 AuthUI.getDefaultTheme(),
                 AuthUI.NO_LOGO,
                 null,
-                true);
+                true, AuthMethodPickerActivity.LAUNCH_TYPE_ACTIVITY);
     }
 
     public static FirebaseUser makeMockFirebaseUser() {

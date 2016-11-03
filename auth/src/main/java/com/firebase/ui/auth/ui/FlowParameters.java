@@ -20,6 +20,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.StyleRes;
 
+import com.firebase.ui.auth.AuthUI;
 import com.firebase.ui.auth.provider.IDPProviderParcel;
 import com.firebase.ui.auth.util.Preconditions;
 
@@ -48,19 +49,24 @@ public class FlowParameters implements Parcelable {
 
     public final boolean smartLockEnabled;
 
+    @AuthUI.AuthPickerType
+    public final int authMethodPickerType;
+
     public FlowParameters(
             @NonNull String appName,
             @NonNull List<IDPProviderParcel> providerInfo,
             @StyleRes int themeId,
             @DrawableRes int logoId,
             @Nullable String termsOfServiceUrl,
-            boolean smartLockEnabled) {
+            boolean smartLockEnabled,
+            int authMethodPickerType) {
         this.appName = Preconditions.checkNotNull(appName, "appName cannot be null");
         this.providerInfo = Preconditions.checkNotNull(providerInfo, "providerInfo cannot be null");
         this.themeId = themeId;
         this.logoId = logoId;
         this.termsOfServiceUrl = termsOfServiceUrl;
         this.smartLockEnabled = smartLockEnabled;
+        this.authMethodPickerType = authMethodPickerType;
     }
 
     @Override
@@ -71,6 +77,7 @@ public class FlowParameters implements Parcelable {
         dest.writeInt(logoId);
         dest.writeString(termsOfServiceUrl);
         dest.writeInt(smartLockEnabled ? 1 : 0);
+        dest.writeInt(authMethodPickerType);
     }
 
     @Override
@@ -89,9 +96,10 @@ public class FlowParameters implements Parcelable {
             String termsOfServiceUrl = in.readString();
             int smartLockEnabledInt = in.readInt();
             boolean smartLockEnabled = (smartLockEnabledInt != 0);
+            int authMethodPickerType = in.readInt();
 
             return new FlowParameters(
-                    appName, providerInfo, themeId, logoId, termsOfServiceUrl, smartLockEnabled);
+                    appName, providerInfo, themeId, logoId, termsOfServiceUrl, smartLockEnabled, authMethodPickerType);
         }
 
         @Override
