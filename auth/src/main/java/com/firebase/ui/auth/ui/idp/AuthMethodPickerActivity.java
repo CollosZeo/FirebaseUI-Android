@@ -16,6 +16,7 @@ package com.firebase.ui.auth.ui.idp;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.util.Log;
@@ -23,16 +24,17 @@ import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.firebase.ui.auth.AuthUI;
 import com.firebase.ui.auth.AuthUI.IdpConfig;
 import com.firebase.ui.auth.BuildConfig;
+import com.firebase.ui.auth.IdpResponse;
 import com.firebase.ui.auth.R;
 import com.firebase.ui.auth.provider.FacebookProvider;
 import com.firebase.ui.auth.provider.GoogleProvider;
 import com.firebase.ui.auth.provider.IdpProvider;
 import com.firebase.ui.auth.provider.IdpProvider.IdpCallback;
-import com.firebase.ui.auth.IdpResponse;
 import com.firebase.ui.auth.provider.TwitterProvider;
 import com.firebase.ui.auth.ui.ActivityHelper;
 import com.firebase.ui.auth.ui.FlowParameters;
@@ -65,11 +67,10 @@ import static com.firebase.ui.auth.AuthUI.AUTH_TYPE_DIALOG;
 public class AuthMethodPickerActivity
         extends IDPBaseActivity
         implements IdpCallback, View.OnClickListener,
-        CompoundButton.OnCheckedChangeListener{
-    private static final String TAG = "AuthMethodPicker";
+        CompoundButton.OnCheckedChangeListener {
+    private static final String TAG = "AuthMethodPicker_";
     private static final int RC_EMAIL_FLOW = 2;
     private static final int RC_ACCOUNT_LINK = 3;
-    private static final int RC_SAVE_CREDENTIAL = 4;
     private ArrayList<IdpProvider> mIdpProviders;
     @Nullable
     private SmartLock mSmartLock;
@@ -112,6 +113,21 @@ public class AuthMethodPickerActivity
             logo.setVisibility(View.GONE);
         } else {
             logo.setImageResource(logoId);
+        }
+        initGoogleSmartLink();
+    }
+
+    private void initGoogleSmartLink() {
+        TextView agreementText = (TextView) findViewById(R.id.smart_lock);
+        if (agreementText != null) {
+            agreementText.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(Intent.ACTION_VIEW).setData(Uri.parse
+                            ("https://get.google.com/smartlock/"));
+                    startActivity(intent);
+                }
+            });
         }
     }
 
@@ -182,7 +198,7 @@ public class AuthMethodPickerActivity
         } else if (requestCode == RC_ACCOUNT_LINK) {
             finish(resultCode, data);
         } else {
-            for(IdpProvider provider : mIdpProviders) {
+            for (IdpProvider provider : mIdpProviders) {
                 provider.onActivityResult(requestCode, resultCode, data);
             }
         }
@@ -249,7 +265,8 @@ public class AuthMethodPickerActivity
     }
 
     @Override
-    public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-        Log.d(TAG, "onCheckedChanged: " + b);
+    public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
+        Log.d(TAG, "onCheckedChanged: " + isChecked);
+        mActivityHelper.getFlowParams().smartLockEnabled = isChecked;
     }
 }

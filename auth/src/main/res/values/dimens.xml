@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="auth_picker_dialog_width">300dp</dimen>
-    <dimen name="auth_picker_dialog_horizontal_margin">25dp</dimen>
+    <dimen name="auth_picker_dialog_horizontal_margin">36dp</dimen>
 </resources>

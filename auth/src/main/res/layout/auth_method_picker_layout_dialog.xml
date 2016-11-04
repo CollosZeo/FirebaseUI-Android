@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -7,75 +8,99 @@
     android:orientation="vertical"
     tools:context=".ui.idp.AuthMethodPickerActivity">
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        style="?attr/alertDialogStyle"
+    <android.support.v7.widget.CardView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:background="@color/auth_picker_dialog"
         android:gravity="center|bottom"
         android:minWidth="@dimen/auth_picker_dialog_width"
         android:orientation="vertical"
-        android:translationZ="3dp">
+        app:cardBackgroundColor="@color/auth_picker_dialog"
+        app:cardCornerRadius="2dp"
+        app:cardElevation="3dp">
 
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1.0"
-            android:gravity="center"
-            android:orientation="vertical">
-
-            <ImageView
-                android:id="@+id/logo"
-                style="@style/FirebaseUI.AuthMethodPicker.Logo" />
-
-            <TextView
-                android:id="@+id/title"
-                style="@style/FirebaseUI.Text.Heading"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginTop="@dimen/auth_picker_dialog_horizontal_margin"
-                android:text="@string/auth_picker_title_one_tap_login"
-                android:textStyle="normal"
-                android:typeface="sans"
-                tools:visibility="visible" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/btn_holder"
-            style="@style/FirebaseUI.AuthMethodPicker.ButtonHolder"
-            android:layout_weight="0"
-            android:paddingBottom="12dp">
-
-            <Button
-                android:id="@+id/email_provider"
-                style="@style/FirebaseUI.Button.AccountChooser.EmailButton"
-                android:text="@string/sign_in_with_email" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/smart_lock_holder"
+            style="?attr/alertDialogStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_weight="0"
-            android:gravity="center"
-            android:orientation="vertical"
-            android:visibility="gone"
-            tools:visibility="visible">
+            android:gravity="center|bottom"
+            android:orientation="vertical">
 
-            <CheckBox
-                android:id="@+id/use_smart_lock"
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1.0"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/logo"
+                    style="@style/FirebaseUI.AuthMethodPicker.Logo" />
+
+                <TextView
+                    android:id="@+id/title"
+                    style="@style/FirebaseUI.Text.Heading"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="@dimen/auth_picker_dialog_horizontal_margin"
+                    android:text="@string/auth_picker_title_one_tap_login"
+                    android:textStyle="normal"
+                    android:typeface="sans"
+                    tools:visibility="visible" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/btn_holder"
+                style="@style/FirebaseUI.AuthMethodPicker.ButtonHolder"
+                android:layout_weight="0"
+                android:paddingBottom="12dp">
+
+                <Button
+                    android:id="@+id/email_provider"
+                    style="@style/FirebaseUI.Button.AccountChooser.EmailButton"
+                    android:text="@string/sign_in_with_email" />
+
+            </LinearLayout>
+
+            <TableLayout
+                android:id="@+id/smart_lock_holder"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
                 android:layout_marginBottom="@dimen/auth_picker_dialog_horizontal_margin"
-                android:checked="true"
-                android:text="@string/use_smart_lock"
-                android:textSize="13sp" />
-        </LinearLayout>
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:visibility="gone"
+                tools:visibility="visible">
 
-    </LinearLayout>
+                <TableRow
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <android.support.v7.widget.AppCompatCheckBox
+                        android:id="@+id/use_smart_lock"
+                        style="?attr/checkboxStyle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingLeft="6dp"
+                        android:paddingRight="6dp"
+                        android:text="@string/auth_dialog_use"
+                        android:textSize="13sp"
+                        app:theme="?attr/checkboxStyle" />
+
+                    <TextView
+                        android:id="@+id/smart_lock"
+                        style="?attr/checkboxStyle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/auth_dialog_smart_lock"
+                        android:textSize="13sp" />
+
+                </TableRow>
+            </TableLayout>
+        </LinearLayout>
+    </android.support.v7.widget.CardView>
 </FrameLayout>
