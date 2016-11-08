@@ -88,6 +88,7 @@
                         android:paddingLeft="6dp"
                         android:paddingRight="6dp"
                         android:text="@string/auth_dialog_use"
+                        android:checked="true"
                         android:textSize="13sp"
                         app:theme="?attr/checkboxStyle" />
 
