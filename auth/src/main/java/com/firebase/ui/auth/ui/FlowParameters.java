@@ -97,10 +97,7 @@ public class FlowParameters implements Parcelable {
             int smartLockEnabledInt = in.readInt();
             boolean smartLockEnabled = (smartLockEnabledInt != 0);
             int authMethodPickerType = in.readInt();
-            List<String> additionalFacebookPermissions = new ArrayList<>();
-            in.readStringList(additionalFacebookPermissions);
-            List<String> additionalGooglePermissions = new ArrayList<>();
-            in.readStringList(additionalGooglePermissions);
+
             return new FlowParameters(
                     appName,
                     providerInfo,
